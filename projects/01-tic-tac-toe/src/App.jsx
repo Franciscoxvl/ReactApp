@@ -4,7 +4,8 @@ import confetti from 'canvas-confetti'
 import { Square } from './components/Square'
 import { TURNS } from './constants'
 import { WINNER_COMBOS } from './constants'
-import { checkWinner } from './logic/board'
+import { checkWinner, checkEndGame } from './logic/board'
+import { WinnerModal } from './components/WinnerModal'
 
 function App() {
 
@@ -16,10 +17,6 @@ function App() {
     setBoard(Array(9).fill(null))
     setTurn(TURNS.x)
     setWinner(null)
-  }
-
-  const checkEndGame = (boardToCheck) => {
-    return boardToCheck.every(square => square !== null)
   }
 
   const updateBoard = (index) => {
@@ -71,30 +68,8 @@ function App() {
         </Square>
       </section>
 
-      {
-        winner !== null && (
-          <section className='winner'>
-            <div className='text'>
-              <h2>
-                {
-                  winner === false
-                    ? 'Empate'
-                    : 'Ganó:'
-                }
-              </h2>
-              <header className='win'>
-                {winner && <Square>{winner}</Square>}
-              </header>
-
-              <footer>
-                <button onClick={resetGame}>
-                  Empezar de nuevo
-                </button>
-              </footer>
-            </div>
-          </section>
-        )
-      }
+      <WinnerModal winner={winner} resetGame={resetGame} />
+      
     </main>
   )
 }
