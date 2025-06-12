@@ -2,12 +2,12 @@ import './App.css'
 import { useState } from 'react'
 import confetti from 'canvas-confetti'
 import { Square } from './components/Square'
-import { TURNS } from "./constants"
+import { TURNS } from './constants'
 import { checkWinner, checkEndGame } from './logic/board'
 import { WinnerModal } from './components/WinnerModal'
 import { saveGameStorage, resetGameStorage } from './logic/storage'
 
-function App() {
+function App () {
 
   const [board, setBoard] = useState(() => {
     const boardFromStorage = window.localStorage.getItem('board')
@@ -41,8 +41,7 @@ function App() {
     setTurn(newTurn)
 
     //Guardar partida
-    saveGameStorage({board: newBoard, turn: newTurn})
-
+    saveGameStorage({ board: newBoard, turn: newTurn })
 
     // Revisar si hay un ganador
     const newWinner = checkWinner(newBoard)
